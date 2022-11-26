@@ -1,12 +1,7 @@
 <?php
 
-    require("config.php");
-
     if(isset($_GET["delete"])) {
-        echo $_GET["delete"];
-        $id = $_GET["id"];
-        $queryDelete = "delete from products where id=$id";
-        $deleted = mysqli_query($con, $queryDelete);
+        $deleted = mySqlDeleteData("products", $_GET["id"]);
 
         if($deleted) {
             header("Location: products.php");

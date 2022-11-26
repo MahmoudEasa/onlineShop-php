@@ -1,3 +1,5 @@
+<?php require("handleData/mySQLDatabase.php"); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,18 +15,15 @@
         <center class="mt-4">
             <a class='btn btn-primary fw-bold' href='index.php'>إضافة منتج</a>
             <h2 class="mb-4 fw-bold">جميع المنتجات المتوفرة</h2>
-            <?php include "delete.php"; ?>
+            <?php include "handleData/deleteProduct.php"; ?>
     
             <div class="row">
                 <?php
-                    require("config.php");
-                    $queryGetData = "select * from products";
-                    $res = mysqli_query($con, $queryGetData);
-                    
+                    $res = mySqlSelectData("products");
                     while($row = mysqli_fetch_array($res)):
                 ?>
     
-                <div class="cal-12 col-lg-5 col-xl-4">
+                <div class="cal-12 col-lg-5 col-xl-4 m-auto">
                     <div class="card mb-3" style="width: 18rem;">
                         <?php
                             echo "<img src='{$row['image']}'
