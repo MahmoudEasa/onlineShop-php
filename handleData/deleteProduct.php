@@ -1,6 +1,7 @@
 <?php
 
     if(isset($_GET["delete"])) {
+        // mySqlDeleteData Is a Function I Created In mySQLDatabase.php File
         $deleted = mySqlDeleteData("products", $_GET["id"]);
 
         if($deleted) {
