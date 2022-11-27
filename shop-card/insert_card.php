@@ -1,13 +1,10 @@
 <?php
-    // ini_set('default_charset', 'UTF-8');
+    require("../functions/myFunctions.php");
+
     if(isset($_GET['addToCart'])){
         $id = $_GET['id'];
         $resProduct = mySqlSelectData("products", $id);
         $productData = mysqli_fetch_array($resProduct);
-        $resUser = mySqlSelectData("users", 3);
-        $userData = mysqli_fetch_array($resUser);
-
-        $userCard;
         $name;
         $price;
         $image;
@@ -18,15 +15,19 @@
             $image = $productData['image'];
         }
 
-        if($userData) {
-            $userCard = $userData['card'];
-        }
+        require("../handleData/getUserCard.php");
+        
+        $findObj = searchObjInArr($jsonToObject->userCard, $id);
 
-        $jsonToObject = json_decode($userCard);
-        array_push($jsonToObject->userCard, (object)["id" => "$id","name" => "$name", "price" => "$price"]);
+            if($findObj == -1){
+                array_push($jsonToObject->userCard, (object)["id" => "$id", "count" => 1,"name" => "$name", "price" => "$price", "image" => "$image"]);
+            }else {
+                header("Location: card.php");
+                exit();
+            }
     
         $userCard = json_encode($jsonToObject, JSON_UNESCAPED_UNICODE);
 
-        mySqlUpdateData("users", "card='$userCard'", 3);
+        mySqlUpdateData("users", "card='$userCard'", $userId);
         header("Location: card.php");
     }

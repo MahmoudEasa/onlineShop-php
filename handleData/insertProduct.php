@@ -14,7 +14,7 @@
                 header("Location: index.php");
             }
         }else {
-            echo "<p style='color: red;'>من فضلك أملئ جميع الحقول</p>";
+            echo "<p style='color: red;'>Please fill in all fields</p>";
         }
     }
     

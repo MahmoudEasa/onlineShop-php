@@ -7,6 +7,6 @@
         if($deleted) {
             header("Location: products.php");
         }else {
-            echo "<p style='color: red;'>حدث خطأ .. لم يتم حذف المنتج</p>";
+            echo "<p style='color: red;'>Something is wrong... try again</p>";
         }
     }

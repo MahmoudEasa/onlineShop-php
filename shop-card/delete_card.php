@@ -1,18 +1,20 @@
 <?php
 
     if(isset($_GET['delete'])){
-        $resUser = mySqlSelectData("users", 3);
-        $userData = mysqli_fetch_array($resUser);
-        $userCard;
+        require("../handleData/getUserCard.php");
 
-        if($userData) {
-            $userCard = $userData['card'];
-        }
-
-        $jsonToObject = json_decode($userCard);
-        $filtered = array_filter($jsonToObject->userCard, fn($id) => $id->id != $_GET['id']);
+        $filtered = array_filter($jsonToObject->userCard, fn($product) => $product->id != $_GET['id']);
         $jsonToObject->userCard = [...$filtered];
         $userCard = json_encode($jsonToObject, JSON_UNESCAPED_UNICODE);
-        mySqlUpdateData("users", "card='$userCard'", 3);
+        mySqlUpdateData("users", "card='$userCard'", $userId);
+        header("Location: card.php");
+    }
+
+    if(isset($_GET['deleteAll'])){
+        require("../handleData/getUserCard.php");
+        
+        $jsonToObject->userCard = [];
+        $userCard = json_encode($jsonToObject, JSON_UNESCAPED_UNICODE);
+        mySqlUpdateData("users", "card='$userCard'", $userId);
         header("Location: card.php");
     }

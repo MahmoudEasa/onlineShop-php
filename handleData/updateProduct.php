@@ -6,7 +6,7 @@
         if($query) {
             header("Location: products.php");
         }else {
-            echo "<p style='color: red;'>حدث خطأ .. لم يتم رفع المنتج</p>";
+            echo "<p style='color: red;'>Something is wrong... try again</p>";
         }
     }
     function setNameAndPriceForUpdate(&$name, &$price){
@@ -32,7 +32,7 @@
             $query = mySqlUpdateData("products", $data, $_GET['id']);
             checkUploaded($query);
         }else {
-            echo "<p style='color: red;'>من فضلك أملئ جميع الحقول</p>";
+            echo "<p style='color: red;'>Please fill in all fields</p>";
             setNameAndPriceForUpdate($name, $price);
         }
     }elseif(isset($_GET["update"])) {

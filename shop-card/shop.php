@@ -1,4 +1,7 @@
-<?php require("../handleData/mySQLDatabase.php"); ?>
+<?php
+    $userId = 3;
+    require("../handleData/mySQLDatabase.php");
+?>
 
 <!DOCTYPE html>
 <html lang="en">
