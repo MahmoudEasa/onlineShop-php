@@ -1,6 +1,6 @@
 <?php
 
-    require("config.php");
+    require("connectDatabase.php");
 
     // Keys => "key1, key2" Values => "'$value1','$value2'"
     function mySqlInsertData($tableName, $keys, $values) {
@@ -11,9 +11,18 @@
         return $query;
     }
 
-    function mySqlSelectData($tableName) {
+    function mySqlSelectData($tableName, $id = null) {
         global $con;
-        $queryGetData = "select * from $tableName";
+        $queryGetData = "select * from $tableName ORDER BY name";
+
+        if(isset($_GET['search'])){
+            $queryGetData = "select * from $tableName where name REGEXP '{$_GET['search']}'";
+        }
+
+        if($id){
+            $queryGetData = "select * from $tableName where id='$id'";
+        }
+
         $res = mysqli_query($con, $queryGetData);
         return $res;
     }

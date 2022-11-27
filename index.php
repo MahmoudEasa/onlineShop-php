@@ -11,9 +11,9 @@
     <link rel="stylesheet" href="css/index.css">
     <?php
         if(isset($_GET["update"])) {
-            echo "<title>Update | تعديل منتج</title>";
+            echo "<title>Update</title>";
         }else {
-            echo "<title>Shop Online | إضافة منتجات</title>";
+            echo "<title>Online Shop</title>";
         }
     ?>
 </head>
@@ -25,9 +25,9 @@
                     <form method="post" enctype="multipart/form-data">
                         <?php
                             if(isset($_GET["update"])) {
-                                echo "<h2>تعديل المنتج</h2>";
+                                echo "<h2>Update Product</h2>";
                             }else {
-                                echo "<h2>موقع تسويقي أونلاين</h2>";
+                                echo "<h2>Online Shop</h2>";
                                 echo "<img class='logo' src='images/logo.webp' alt='Logo'><br>";
                             }
                             require("handleData/insertProduct.php");

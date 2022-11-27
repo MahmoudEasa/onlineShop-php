@@ -1,4 +1,4 @@
-<?php require("handleData/mySQLDatabase.php"); ?>
+<?php require("../handleData/mySQLDatabase.php"); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,22 +7,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="../css/global.css">
     <title>Products</title>
 </head>
 <body>
+    <?php require("../components/Navbar.php"); ?>
+
     <div class="container">
         <center class="mt-4">
-            <a class='btn btn-primary fw-bold' href='index.php'>Add Product</a>
-            <h2 class="my-4 fw-bold">Admin Control Panel</h2>
-            <?php include "handleData/deleteProduct.php"; ?>
-    
+            <h2 class="my-4 fw-bold">All Products</h2>
+            
+            <?php
+                if(isset($_GET['search'])) {
+                    echo "<a href='shop.php'
+                            class='btn btn-success mb-5'>
+                            View All Products
+                        </a>";
+                }
+            ?>
+
             <div class="row">
                 <?php
-                    require("components/CardUI.php");
+                    require("insert_card.php");
+                    require("../components/CardUI.php");
                     $res = mySqlSelectData("products");
                     while($row = mysqli_fetch_array($res)):
-                        echo cardUI($row, "products");
+                        echo cardUI($row, "shop");
                     endwhile;
                 ?>
             </div>
